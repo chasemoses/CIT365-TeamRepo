@@ -41,6 +41,9 @@ namespace MegaDesk_Moses
             InitializeComboBoxes();
         }
 
+        /// <summary>
+        /// Fills the combo boxes with correct values when called in the constructor of this form.
+        /// </summary>
         private void InitializeComboBoxes()
         {
             // Drawer Count Initialize and Index set to 0
@@ -114,6 +117,11 @@ namespace MegaDesk_Moses
             ErrLabelDepth.Visible = false;
         }
 
+        /// <summary>
+        /// Helper Method to reduce repeated code (Don't Repeat Yourself or DRY Principle)
+        /// </summary>
+        /// <param name="label"></param>
+        /// <param name="errLabelMsg"></param>
         private void SetValidateErrors(Label label, string errLabelMsg = "Value must be within range!")
         {
             label.Text = errLabelMsg;

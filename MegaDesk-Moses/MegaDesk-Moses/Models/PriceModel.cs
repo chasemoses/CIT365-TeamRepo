@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace MegaDesk_Moses.Models
 {
+    /// <summary>
+    /// DisplayQuote.cs will be using this class instead of DeskQuote when
+    /// determining the prices that will be showed to the user in DisplayQuote.cs
+    /// </summary>
     public class PriceModel
     {
         public decimal AreaCost { get; set; }
@@ -16,15 +20,16 @@ namespace MegaDesk_Moses.Models
 
         private const decimal BASE_PRICE = 200m;
 
-        public PriceModel(decimal areaCost, decimal drawerCost, 
-            decimal materialCost, decimal expediteCost)
+        public PriceModel(DeskQuote deskQuote, Desk desk)
         {
-            AreaCost = areaCost;
-            DrawerCost = drawerCost;
-            MaterialCost = materialCost;
-            ExpediteCost = expediteCost;
+            AreaCost = desk.CalculateAreaCost();
+            DrawerCost = desk.CalculateDrawerCost();
+            MaterialCost = desk.CalculateMaterialCost();
+            ExpediteCost = deskQuote.GetRushOrder(deskQuote.RushOrderDay, desk.GetArea());
 
-            TotalCost = AreaCost + DrawerCost + MaterialCost + ExpediteCost + BASE_PRICE;
+            TotalCost = AreaCost +
+                DrawerCost +
+                MaterialCost + ExpediteCost + BASE_PRICE;
         }
 
     }

@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace MegaDesk_Moses.Repositories
 {
+    /// <summary>
+    /// This class is responsible for CRUD operations for the quotes that will be displayed to the user, using the Repository Pattern.
+    /// Lets users create and save quotes, get a list of all quotes in the file, and delete a specific quote from the list (Think that still needs to be implemented though.)
+    /// </summary>
     public class QuoteRepository
     {
         private List<DeskQuote> _deskQuotes;

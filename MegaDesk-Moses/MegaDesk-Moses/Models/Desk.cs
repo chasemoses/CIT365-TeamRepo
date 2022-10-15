@@ -12,6 +12,11 @@ using System.Windows.Forms.VisualStyles;
 
 namespace MegaDesk_Moses.Models
 {
+    /// <summary>
+    /// This is an enum, inheriting from SmartEnum by Ardalis (nuget package).
+    /// Allows more control in circumnstances where you use the name, versus 
+    /// obtaining the value.
+    /// </summary>
     public class SurfaceMaterials : SmartEnum<SurfaceMaterials, decimal>
     {
         public static readonly SurfaceMaterials Laminate = new SurfaceMaterials(nameof(Laminate), 100m);
@@ -20,6 +25,11 @@ namespace MegaDesk_Moses.Models
         public static readonly SurfaceMaterials Veneer = new SurfaceMaterials(nameof(Veneer), 125m);
         public static readonly SurfaceMaterials Pine = new SurfaceMaterials(nameof(Pine), 50m);
 
+        /// <summary>
+        /// Special Constructor used by Smart Enum
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
         public SurfaceMaterials(string name, decimal value) : base(name, value)
         {
         }
@@ -32,28 +42,27 @@ namespace MegaDesk_Moses.Models
         public int Depth { get; set; }
         public int NumberOfDrawers { get; set; }
 
+        // This property is used to make sure the smartenum for SurfaceMaterials stores 
+        // properly in the json file.
         [JsonConverter(typeof(SmartEnumNameConverter<SurfaceMaterials, decimal>))]
         public SurfaceMaterials SurfaceMaterials { get; set; }
 
-        // Constructor
-        public Desk(int width, int depth, int numberOfDrawers, SurfaceMaterials surfaceMaterials)
-        {
-            Width = width;
-            Depth = depth;
-            NumberOfDrawers = numberOfDrawers;
-            SurfaceMaterials = surfaceMaterials;
-        }
+
+        // Constant variables per instructions
+        const int MIN_WIDTH = 24;
+        const int MAX_WIDTH = 96;
+        const int MIN_DEPTH = 12;
+        const int MAX_DEPTH = 48;
 
         // Default Constructor
         public Desk()
         {
         }
 
-        const int MIN_WIDTH = 24;
-        const int MAX_WIDTH = 96;
-        const int MIN_DEPTH = 12;
-        const int MAX_DEPTH = 48;
-
+        /// <summary>
+        /// Calculation Methods for PriceModel to display to users in DisplayQuote.cs
+        /// </summary>
+        /// <returns></returns>
         public decimal CalculateAreaCost()
         {
             int deskArea = Width * Depth;
@@ -82,6 +91,13 @@ namespace MegaDesk_Moses.Models
         {
             return SurfaceMaterials.Value;
         }
+
+
+        /// <summary>
+        /// Encapsulation Methods that are called from DeskQuote to update Desk's properties.
+        /// </summary>
+        /// <param name="material"></param>
+        /// <returns></returns>
         internal Result<SurfaceMaterials> UpdateMaterial(SurfaceMaterials material)
         {
             // Do validation here
@@ -125,6 +141,10 @@ namespace MegaDesk_Moses.Models
             return Result.Success();
         }
 
+        /// <summary>
+        /// Helper class to make sure the width and depth is valid.
+        /// </summary>
+        /// <returns></returns>
         internal bool IsValid()
         {
             if (Width < MIN_WIDTH || Width > MAX_WIDTH)

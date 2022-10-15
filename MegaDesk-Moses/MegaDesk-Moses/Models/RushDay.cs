@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace MegaDesk_Moses.Models
 {
+    /// <summary>
+    /// Another Smart Enum to handle the RushDay values, and the ability to 
+    /// interchange the enum name and the value that will be displayed to user.
+    /// </summary>
     public class RushDay : SmartEnum<RushDay>
     {
         public static readonly RushDay Normal = new RushDay(nameof(Normal), 0, "Normal");
