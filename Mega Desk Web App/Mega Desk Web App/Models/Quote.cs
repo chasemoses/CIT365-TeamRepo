@@ -2,6 +2,7 @@
 
 namespace Mega_Desk_Web_App.Models
 {
+    //Comment made by allan for testing purposes.
     public class Quote
     {
         public int ID { get; set; }
