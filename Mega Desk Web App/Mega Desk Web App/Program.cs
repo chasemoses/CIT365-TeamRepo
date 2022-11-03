@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Mega_Desk_Web_App.Data;
+using Mega_Desk_Web_App.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -9,6 +10,13 @@ builder.Services.AddDbContext<Mega_Desk_Web_AppContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Mega_Desk_Web_AppContext") ?? throw new InvalidOperationException("Connection string 'Mega_Desk_Web_AppContext' not found.")));
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    SeedData.Initialize(services);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
