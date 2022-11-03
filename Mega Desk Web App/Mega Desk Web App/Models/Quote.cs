@@ -5,6 +5,16 @@ namespace Mega_Desk_Web_App.Models
     //Comment made by allan for testing purposes.
     public class Quote
     {
+        /**public enum desktopMaterial
+        {
+            Oak = 200,
+            Laminate = 1000,
+            Pine = 50,
+            Rosewood = 300,
+            Veneer = 125
+        }
+        */
+
         public const int MINW = 24;
         public const int MAXW = 96;
         public const int MIND = 12;
