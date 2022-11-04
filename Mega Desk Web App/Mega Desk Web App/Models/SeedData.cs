@@ -1,9 +1,10 @@
 ﻿using Mega_Desk_Web_App.Data;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace Mega_Desk_Web_App.Models
 {
-    public class SeedData
+    public static class SeedData
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
@@ -11,10 +12,10 @@ namespace Mega_Desk_Web_App.Models
                 serviceProvider.GetRequiredService<
                     DbContextOptions<Mega_Desk_Web_AppContext>>()))
             {
-                if (context == null || context.Quote == null)
+               if (context == null || context.Quote == null)
                 {
-                    throw new ArgumentNullException("Null RazorPagesQuoteContext");
-                }
+                    throw new ArgumentNullException("Null QuoteContext");
+              }
 
                 // Look for any Quotes.
                 if (context.Quote.Any())
