@@ -1,4 +1,4 @@
-﻿@page
+﻿@page 
 @model Mega_Desk_Web_App.Pages.Quotes.IndexModel
 
 @{
@@ -10,14 +10,30 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+
+<form id="searchBar">
+    <p>
+        Material Look Up: <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Search" />
+    </p>
+    <p id="lookUp">
+        CustName Look Up: <input type="text" asp-for="QuoteCustName" />
+        <input type="submit" value="Search" />
+    </p>
+</form>
+
 <table class="table">
     <thead>
         <tr>
             <th>
+                <a asp-page="./Index" asp-route-sortQuote="@Model.CustNameSort">
                 @Html.DisplayNameFor(model => model.Quote[0].CustName)
+                </a>
             </th>
             <th>
+                <a asp-page="./Index" asp-route-sortQuote="@Model.DateSort">
                 @Html.DisplayNameFor(model => model.Quote[0].QuoteDate)
+                </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Quote[0].Width)
