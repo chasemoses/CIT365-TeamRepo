@@ -22,7 +22,7 @@ namespace Mega_Desk_Web_App.Models
         public const int MAXW = 96;
         public const int MIND = 12;
         public const int MAXD = 48;
-        public const int MINDCOUNT = 1;
+        public const int MINDCOUNT = 0;
         public const int MAXDCOUNT = 7;
 
         public const int BASE_PRICE = 200;
