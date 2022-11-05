@@ -30,42 +30,46 @@ namespace Mega_Desk_Web_App.Pages.Quotes
 
 
         public string DateSort { get; set; }
+
         public string CustNameSort { get; set; }
 
 
         public async Task OnGetAsync(string sortQuote, string SearchString)
         {
-            //var quotes = from m in _context.Quote
-            //                 select m;
-            //CustNameSort = String.IsNullOrEmpty(sortQuote) ? "Name" : "";
-            //DateSort = sortQuote == "Date" ? "date_desc" : "Date";
+            // Get list of quotes from dbcontext
+            var quotes = from m in _context.Quote
+                         select m;
 
-            //if (!string.IsNullOrEmpty(SearchString))
-            //{
-            //    quotes = quotes.Where(s => s.QuoteDate.Contains(SearchString));
-            //}
-            //if (!string.IsNullOrEmpty(QuoteCustName))
-            //{
-            //    quotes = quotes.Where(s => s.CustName.Contains(QuoteCustName));
-            //}
+            // Determine if the sortquote is not empty
+            CustNameSort = String.IsNullOrEmpty(sortQuote) ? "Name" : "";
+            DateSort = sortQuote == "Date" ? "date_desc" : "Date";
 
-            //switch (sortQuote)
-            //{
-            //    case "CustName":
-            //        quotes = quotes.OrderByDescending(s => s.CustName);
-            //        break;
-            //    case "QuoteDate":
-            //        quotes = quotes.OrderByDescending(s => s.QuoteDate);
-            //        break;
-            //    default:
-            //        quotes = quotes.OrderBy(s => s.CustName);
-            //        break;
-            //}
-
-            if (_context.Quote != null)
+            if (!string.IsNullOrEmpty(SearchString))
             {
-                Quote = await _context.Quote.ToListAsync();
+                quotes = quotes.Where(s => s.Material == (MaterialType)Enum.Parse(typeof(MaterialType), SearchString));
             }
+            if (!string.IsNullOrEmpty(QuoteCustName))
+            {
+                quotes = quotes.Where(s => s.CustName.Contains(QuoteCustName));
+            }
+
+            switch (sortQuote)
+            {
+                case "Name":
+                    quotes = quotes.OrderByDescending(s => s.CustName);
+                    break;
+                case "Date":
+                    quotes = quotes.OrderBy(s => s.QuoteDate);
+                    break;
+                case "date_desc":
+                    quotes = quotes.OrderByDescending(s => s.QuoteDate);
+                    break;
+                default:
+                    quotes = quotes.OrderBy(s => s.CustName);
+                    break;
+            }
+
+            Quote = await quotes.ToListAsync();
         }
 
     }

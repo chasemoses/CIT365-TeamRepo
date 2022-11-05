@@ -38,7 +38,7 @@ namespace Mega_Desk_Web_App.Models
 
         [Display(Name = "Date Added")]
         [DataType(DataType.Date)]
-        public DateTime QuoteDate => DateTime.Now;
+        public DateTime QuoteDate { get; set; }
 
         [Display(Name = "Desk Width")]
         [Range(MINW, MAXW)]
@@ -74,6 +74,10 @@ namespace Mega_Desk_Web_App.Models
 
         public void CalculateTotalPrice()
         {
+            // Set date
+            QuoteDate = DateTime.Now;
+
+            // Calculate price
             Price = BASE_PRICE +
                     CalculateAreaCost() +
                     CalculateMaterialCost() +

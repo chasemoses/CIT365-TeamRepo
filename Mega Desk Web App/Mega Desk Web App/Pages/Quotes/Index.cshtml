@@ -27,11 +27,15 @@
                 <a asp-page="./Index" asp-route-sortQuote="@Model.CustNameSort">
                 @Html.DisplayNameFor(model => model.Quote[0].CustName)
                 </a>
+
+                @*@Html.ActionLink("Name", "Index", new {custName = Model.CustNameSort})*@
             </th>
             <th>
                 <a asp-page="./Index" asp-route-sortQuote="@Model.DateSort">
                 @Html.DisplayNameFor(model => model.Quote[0].QuoteDate)
                 </a>
+
+                @*@Html.ActionLink("Date", "Index", new {dateSort = Model.DateSort})*@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Quote[0].Width)
