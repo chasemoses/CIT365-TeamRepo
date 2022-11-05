@@ -60,7 +60,7 @@ footer {
 }
 
 .table th {
-    background-color: #6e685e;
+    background-color: #62672d;
 }
 
 .table {
@@ -88,4 +88,7 @@ input.btn.btn-primary{
 }
 .editbtn {
     margin-top: 10px;
+}
+.searchbtn {
+    padding: 5px;
 }

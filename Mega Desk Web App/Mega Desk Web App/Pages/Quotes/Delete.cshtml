@@ -7,7 +7,7 @@
 
 <h1>Delete Quote</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h4 class="text-danger"><stong>Are you sure you want to delete this?</stong></h4>
 <div>
     
     <hr />
@@ -65,7 +65,7 @@
     <form method="post">
         <input type="hidden" asp-for="Quote.ID" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <button class="btn btn-light editbtn">
+        <button class="btn btn-light">
             <a asp-page="Index">Back to Quotes</a>
         </button>
     </form>
