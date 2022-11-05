@@ -9,10 +9,83 @@ html {
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
+    
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-image: url("image/deskback.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#container {
+    position: relative;
+    min-height: 100vh;
+}
+
+#content-wrap {
+    padding-bottom: 2.5rem; 
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem; 
+}
+#searchBar {
+    display: flex;
+    row-gap: 100px;
+    flex-direction: row;
+}
+
+header {
+    background-color: #ff0000;
+}
+
+footer {
+    background-color: white;
+}
+
+#lookUp {
+    padding-left: 10px;
+}
+
+.table td {
+    background-color: whitesmoke;
+    padding: 10px;
+}
+
+.table th {
+    background-color: #6e685e;
+}
+
+.table {
+    border: solid;
+
+}
+
+.row {
+    border: solid;
+    background-color: whitesmoke;
+    padding: 10px;
+    border-radius: 25px;
+}
+
+a {
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: none;
+        color: #492f1b;
+    }
+input.btn.btn-primary{
+    margin-top: 10px;
+}
+.editbtn {
+    margin-top: 10px;
 }
