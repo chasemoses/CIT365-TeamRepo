@@ -27,7 +27,6 @@ namespace Mega_Desk_Web_App.Models
                     new Quote
                     {
                         CustName = "Allan",
-                        QuoteDate = DateTime.Parse("1989-2-12"),
                         Material = "Oak",
                         Price = 200
                     },
@@ -35,7 +34,6 @@ namespace Mega_Desk_Web_App.Models
                     new Quote
                     {
                         CustName = "Chase ",
-                        QuoteDate = DateTime.Parse("1984-3-13"),
                         Material = "Laminate",
                         Price = 100
                     },
@@ -43,7 +41,6 @@ namespace Mega_Desk_Web_App.Models
                     new Quote
                     {
                         CustName = "Britany",
-                        QuoteDate = DateTime.Parse("1986-2-23"),
                         Material = "Pine",
                         Price = 50
                     },
@@ -51,7 +48,6 @@ namespace Mega_Desk_Web_App.Models
                     new Quote
                     {
                         CustName = "Jillian",
-                        QuoteDate = DateTime.Parse("1959-4-15"),
                         Material = "Rosewood",
                         Price = 300
                     }

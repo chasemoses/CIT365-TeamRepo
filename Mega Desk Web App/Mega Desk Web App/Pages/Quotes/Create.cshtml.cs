@@ -32,9 +32,11 @@ namespace Mega_Desk_Web_App.Pages.Quotes
         public async Task<IActionResult> OnPostAsync()
         {
           if (!ModelState.IsValid)
-            {
+          {
                 return Page();
-            }
+          }
+
+           Quote.CalculateTotalPrice();
 
             _context.Quote.Add(Quote);
             await _context.SaveChangesAsync();
