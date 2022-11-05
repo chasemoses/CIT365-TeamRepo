@@ -102,28 +102,6 @@ namespace Mega_Desk_Web_App.Models
 
         private decimal CalculateMaterialCost()
         {
-            //decimal materialPrice = 0;
-
-            //switch (Material)
-            //{
-            //    case MaterialType.Oak:
-            //        materialPrice = 200m;
-            //        break;
-
-            //    case MaterialType.Laminate:
-            //        materialPrice = 100m;
-            //        break;
-            //    case MaterialType.Pine:
-            //        materialPrice = 50m;
-            //        break;
-            //    case "Rosewood":
-            //        materialPrice = 300m;
-            //        break;
-            //    case "Veneer":
-            //        materialPrice = 125m;
-            //        break;
-            //}
-
             return (decimal)Material;
         }
 
