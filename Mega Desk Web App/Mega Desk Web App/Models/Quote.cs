@@ -57,10 +57,11 @@ namespace Mega_Desk_Web_App.Models
 
         [Display(Name = "Desk Material")]
         [Required]
-        public string Material { get; set; } = string.Empty;
+        public MaterialType Material { get; set; }
 
+        [Display(Name = "Production Time")]
         [Required]
-        public int Production { get; set; }
+        public ProductionTime Production { get; set; }
 
         [Column(TypeName = "decimal(18, 2)")]
         [Required]
@@ -97,32 +98,29 @@ namespace Mega_Desk_Web_App.Models
 
         private decimal CalculateMaterialCost()
         {
-            decimal materialPrice = 0;
+            //decimal materialPrice = 0;
 
-            switch(Material)
-            {
-                case "Oak":
-                    materialPrice = 200m;
-                    break;
+            //switch (Material)
+            //{
+            //    case MaterialType.Oak:
+            //        materialPrice = 200m;
+            //        break;
 
-                case "Laminate":
-                    materialPrice = 100m;
-                    break;
-                case "Pine":
-                    materialPrice = 50m;
-                    break;
-                case "Rosewood":
-                    materialPrice = 300m;
-                    break;
-                case "Veneer":
-                    materialPrice = 125m;
-                    break;
-            }
+            //    case MaterialType.Laminate:
+            //        materialPrice = 100m;
+            //        break;
+            //    case MaterialType.Pine:
+            //        materialPrice = 50m;
+            //        break;
+            //    case "Rosewood":
+            //        materialPrice = 300m;
+            //        break;
+            //    case "Veneer":
+            //        materialPrice = 125m;
+            //        break;
+            //}
 
-            // If we have reached this point, then the material type
-
-
-            return materialPrice;
+            return (decimal)Material;
         }
 
         private decimal CalculateDrawerCost()
@@ -138,9 +136,9 @@ namespace Mega_Desk_Web_App.Models
         private decimal CalculateProductionCost()
         {
 
-            switch(Production)
+            switch (Production)
             {
-                case 3:
+                case ProductionTime.ThreeDay:
                     if (Area < 1000)
                         return 60m;
                     else if (Area >= 1000 && Area <= 2000)
@@ -149,7 +147,7 @@ namespace Mega_Desk_Web_App.Models
                         return 80m;
                     break;
 
-                case 5:
+                case ProductionTime.FiveDay:
                     if (Area < 1000)
                         return 40m;
                     else if (Area >= 1000 && Area <= 2000)
@@ -158,7 +156,7 @@ namespace Mega_Desk_Web_App.Models
                         return 60m;
                     break;
 
-                case 7:
+                case ProductionTime.SevenDay:
                     if (Area < 1000)
                         return 30m;
                     else if (Area >= 1000 && Area <= 2000)

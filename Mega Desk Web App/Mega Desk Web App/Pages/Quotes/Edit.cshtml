@@ -1,4 +1,5 @@
 ﻿@page "{id:int}"
+@using Mega_Desk_Web_App.Models
 @model Mega_Desk_Web_App.Pages.Quotes.EditModel
 
 @{
@@ -41,12 +42,20 @@
             </div>
             <div class="form-group">
                 <label asp-for="Quote.Material" class="control-label"></label>
-                <input asp-for="Quote.Material" class="form-control" />
+
+                <select asp-for="Quote.Material" class="form-control" asp-items="Html.GetEnumSelectList<MaterialType>()">
+                    <option selected disabled>-- Select Material --</option>
+
+                </select>
                 <span asp-validation-for="Quote.Material" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Quote.Production" class="control-label"></label>
-                <input asp-for="Quote.Production" class="form-control" />
+
+                <select asp-for="Quote.Production" class="form-control" asp-items="Html.GetEnumSelectList<ProductionTime>()">
+                    <option selected disabled>-- Select Production Time --</option>
+
+                </select>
                 <span asp-validation-for="Quote.Production" class="text-danger"></span>
             </div>
             <div class="form-group">

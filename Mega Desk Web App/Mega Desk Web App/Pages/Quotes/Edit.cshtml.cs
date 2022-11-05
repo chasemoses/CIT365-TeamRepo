@@ -52,6 +52,7 @@ namespace Mega_Desk_Web_App.Pages.Quotes
 
             try
             {
+                Quote.CalculateTotalPrice();
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
