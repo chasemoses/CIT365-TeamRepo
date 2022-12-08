@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using SMDesigner.Data;
 using SMDesigner.Models;
@@ -20,9 +21,85 @@ namespace SMDesigner.Controllers
         }
 
         // GET: SacramentPrograms
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            return View(await _context.SacramentPrograms.ToListAsync());
+            ViewData["ConductorLeaderSortParm"] = String.IsNullOrEmpty(sortOrder) ? "conductL_desc" : "";
+            ViewData["OpenSongSortParm"] = String.IsNullOrEmpty(sortOrder) ? "openS_desc" : "openS";
+            ViewData["ProgramDateSortParm"] = sortOrder == "programDate" ? "programDate_desc" : "programDate";
+            ViewData["OpenPrayerSortParm"] = String.IsNullOrEmpty(sortOrder) ? "openPrayer_desc" : "openPrayer";
+            ViewData["SpeakerFullNameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "speaker_desc" : "speaker";
+            ViewData["SacramentSortParm"] = String.IsNullOrEmpty(sortOrder) ? "sacrament_desc" : "sacrament";
+            ViewData["SubjectSortParm"] = String.IsNullOrEmpty(sortOrder) ? "subject_desc" : "subject";
+            ViewData["IntermediateNumSortParm"] = String.IsNullOrEmpty(sortOrder) ? "intermedNum_desc" : "intermedNum";
+            ViewData["CloseSongSortParm"] = String.IsNullOrEmpty(sortOrder) ? "closeSong_desc" : "closeSong";
+            ViewData["ClosePrayer"] = String.IsNullOrEmpty(sortOrder) ? "closePrayer_desc" : "closePrayer";
+
+            var sacramentPrograms = from s in _context.SacramentPrograms
+                           select s;
+            switch (sortOrder)
+            {
+                case "conductL_desc":
+                    sacramentPrograms = sacramentPrograms.OrderByDescending(s => s.ConductorL);
+                    break;
+                case "openS":
+                    sacramentPrograms = sacramentPrograms.OrderBy(s => s.OpenSong);
+                    break;
+                case "openS_desc":
+                    sacramentPrograms = sacramentPrograms.OrderByDescending(s => s.OpenSong);
+                    break;
+                case "openPrayer":
+                    sacramentPrograms = sacramentPrograms.OrderBy(s => s.OpenPrayer);
+                    break;
+                case "openPrayer_desc":
+                    sacramentPrograms = sacramentPrograms.OrderByDescending(s => s.OpenPrayer);
+                    break;
+                case "speaker":
+                    sacramentPrograms = sacramentPrograms.OrderBy(s => s.SpeakerFullName);
+                    break;
+                case "speaker_desc":
+                    sacramentPrograms = sacramentPrograms.OrderByDescending(s => s.SpeakerFullName);
+                    break;
+                case "sacrament":
+                    sacramentPrograms = sacramentPrograms.OrderBy(s => s.SacramentSong);
+                    break;
+                case "sacrament_desc":
+                    sacramentPrograms = sacramentPrograms.OrderByDescending(s => s.SacramentSong);
+                    break;
+                case "subject":
+                    sacramentPrograms = sacramentPrograms.OrderBy(s => s.Subject);
+                    break;
+                case "subject_desc":
+                    sacramentPrograms = sacramentPrograms.OrderByDescending(s => s.Subject);
+                    break;
+                case "intermedNum":
+                    sacramentPrograms = sacramentPrograms.OrderBy(s => s.IntermedNum);
+                    break;
+                case "intermedNum_desc":
+                    sacramentPrograms = sacramentPrograms.OrderByDescending(s => s.IntermedNum);
+                    break;
+                case "programDate_desc":
+                    sacramentPrograms = sacramentPrograms.OrderByDescending(s => s.ProgramDate);
+                    break;
+                case "closingSong":
+                    sacramentPrograms = sacramentPrograms.OrderBy(s => s.CloseSong);
+                    break;
+                case "closingSong_desc":
+                    sacramentPrograms = sacramentPrograms.OrderByDescending(s => s.CloseSong);
+                    break;
+                case "closingPrayer":
+                    sacramentPrograms = sacramentPrograms.OrderBy(s => s.ClosePrayer);
+                    break;
+                case "closingPrayer_desc":
+                    sacramentPrograms = sacramentPrograms.OrderByDescending(s => s.ClosePrayer);
+                    break;
+                case "programDate":
+                    sacramentPrograms = sacramentPrograms.OrderBy(s => s.ProgramDate);
+                    break;
+                default:
+                    sacramentPrograms = sacramentPrograms.OrderBy(s => s.ConductorL);
+                    break;
+            }
+            return View(await sacramentPrograms.AsNoTracking().ToListAsync());
         }
 
         // GET: SacramentPrograms/Details/5
