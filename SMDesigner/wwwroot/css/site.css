@@ -1,6 +1,9 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
-
+@import url('https://fonts.cdnfonts.com/css/eras-light-itc');
+@import url('https://fonts.cdnfonts.com/css/hubot-sans');
+@import url('https://fonts.cdnfonts.com/css/bodonixt-3');
+@import url('https://fonts.cdnfonts.com/css/itc-eras-ultra');
 a.navbar-brand {
   white-space: normal;
   text-align: center;
@@ -59,8 +62,10 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    font-family: 'ITC Eras Light', sans-serif;
+    color: #2B2C28;
 }
 .footer {
   position: absolute;
@@ -68,4 +73,61 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+}
+.topLogo {
+    text-align: center;
+    background-color: #FCF9EE;
+}
+a{
+    text-decoration: none;
+}
+hr {
+    height: 3px;
+    background-color: #d4af37;
+    border: none;
+}
+th, td {
+    border: 1px solid;
+    border-color: #2B2C28;
+}
+th {
+    text-align: center;
+    vertical-align: middle;
+    color: #F4EDED;
+    height: 80px;
+    width: 160px;
+}
+table {
+    width: 100%;
+}
+td a {
+    color: #52ADC7;
+}
+
+th a {
+    height: 70px;
+    color: #d4af37;
+    font-weight: bold;
+}
+thead {
+    background-color: #2B2C28;
+}
+tbody {
+    background-color: #FCF9EE;
+}
+header {
+    background-color: #d4af37;
+    font-family: 'ITC Eras Light', sans-serif;   
+}
+.nav-item a {
+    color: #F4EDED;
+    font-weight: bold;
+}
+p a {
+    color: #52ADC7;
+    font-weight: bold;
+}
+div .acceptlink a {
+    color: #52ADC7;
+    font-weight: bold;
 }

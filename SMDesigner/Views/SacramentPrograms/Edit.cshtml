@@ -14,6 +14,11 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ID" />
             <div class="form-group">
+                <label asp-for="ProgramDate" class="control-label"></label>
+                <input asp-for="ProgramDate" class="form-control" />
+                <span asp-validation-for="ProgramDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="ConductorL" class="control-label"></label>
                 <input asp-for="ConductorL" class="form-control" />
                 <span asp-validation-for="ConductorL" class="text-danger"></span>
@@ -22,11 +27,6 @@
                 <label asp-for="OpenSong" class="control-label"></label>
                 <input asp-for="OpenSong" class="form-control" />
                 <span asp-validation-for="OpenSong" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ProgramDate" class="control-label"></label>
-                <input asp-for="ProgramDate" class="form-control" />
-                <span asp-validation-for="ProgramDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="OpenPrayer" class="control-label"></label>
@@ -63,8 +63,9 @@
                 <input asp-for="ClosePrayer" class="form-control" />
                 <span asp-validation-for="ClosePrayer" class="text-danger"></span>
             </div>
+            <br>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-info" />
             </div>
         </form>
     </div>

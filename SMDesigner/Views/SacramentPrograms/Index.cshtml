@@ -6,20 +6,22 @@
 
 <h1>Index</h1>
 
-<p>
+<p class="newlink">
     <a asp-action="Create">Create New</a>
 </p>
+<hr />
+<div style="overflow-x:auto;">
 <table class="table">
     <thead>
         <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ProgramDateSortParm"]">@Html.DisplayNameFor(model => model.ProgramDate)</a>
+            </th>
             <th>
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["ConductorLeaderSortParm"]">@Html.DisplayNameFor(model => model.ConductorL)</a>
             </th>
             <th>
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["OpenSongSortParm"]">@Html.DisplayNameFor(model => model.OpenSong)</a>
-            </th>
-            <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["ProgramDateSortParm"]">@Html.DisplayNameFor(model => model.ProgramDate)</a>
             </th>
             <th>
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["OpenPrayerSortParm"]">@Html.DisplayNameFor(model => model.OpenPrayer)</a>
@@ -46,16 +48,17 @@
         </tr>
     </thead>
     <tbody>
+   
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProgramDate)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ConductorL)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.OpenSong)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProgramDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.OpenPrayer)
@@ -85,5 +88,7 @@
             </td>
         </tr>
 }
+
     </tbody>
 </table>
+</div>
