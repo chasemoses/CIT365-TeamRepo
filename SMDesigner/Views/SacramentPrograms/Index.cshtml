@@ -4,12 +4,35 @@
     ViewData["Title"] = "Index";
 }
 
+@{
+    ViewBag.Title = "Index";
+}
+
+
 <h1>Index</h1>
 
 <p class="newlink">
     <a asp-action="Create">Create New</a>
 </p>
 <hr />
+
+
+@using (Html.BeginForm())
+{
+    <p>
+        Find by Month:
+        <select id="monthString" name="monthString" asp-items="Html.GetEnumSelectList<MonthEnum>()">
+            <option selected value="@null" >-- Select Month --</option>
+        </select>
+    </p>
+
+    <p>
+        Find by Year: <input type="text" name="YearString" value="@ViewData["YearFilter"]" />
+        <input type="submit" value="Search" class="btn btn-default" /> |
+        <a asp-action="Index">Back to Full List</a>
+    </p>
+}
+
 <div style="overflow-x:auto;">
 <table class="table">
     <thead>

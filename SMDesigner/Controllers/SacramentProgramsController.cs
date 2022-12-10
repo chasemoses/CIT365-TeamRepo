@@ -20,9 +20,12 @@ namespace SMDesigner.Controllers
             _context = context;
         }
 
+        
+
         // GET: SacramentPrograms
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, string monthString, string yearString)
         {
+
             ViewData["ConductorLeaderSortParm"] = String.IsNullOrEmpty(sortOrder) ? "conductL_desc" : "";
             ViewData["OpenSongSortParm"] = String.IsNullOrEmpty(sortOrder) ? "openS_desc" : "openS";
             ViewData["ProgramDateSortParm"] = sortOrder == "programDate" ? "programDate_desc" : "programDate";
@@ -33,9 +36,23 @@ namespace SMDesigner.Controllers
             ViewData["IntermediateNumSortParm"] = String.IsNullOrEmpty(sortOrder) ? "intermedNum_desc" : "intermedNum";
             ViewData["CloseSongSortParm"] = String.IsNullOrEmpty(sortOrder) ? "closeSong_desc" : "closeSong";
             ViewData["ClosePrayer"] = String.IsNullOrEmpty(sortOrder) ? "closePrayer_desc" : "closePrayer";
+            ViewData["MonthFilter"] = monthString;
+            ViewData["YearFilter"] = yearString;
 
             var sacramentPrograms = from s in _context.SacramentPrograms
                            select s;
+
+            // Checking to see if Filter strings (Month, year) are null
+            if (!string.IsNullOrEmpty(monthString))
+            {
+                sacramentPrograms = sacramentPrograms.Where(d => d.ProgramDate.Month == int.Parse(monthString));
+            }
+
+            if (!string.IsNullOrEmpty(yearString))
+            {
+                sacramentPrograms = sacramentPrograms.Where(d => d.ProgramDate.Year == int.Parse(yearString));
+            }
+
             switch (sortOrder)
             {
                 case "conductL_desc":
@@ -251,7 +268,7 @@ namespace SMDesigner.Controllers
                 return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
             }
         }
-
+       
         private bool SacramentProgramExists(int id)
         {
             return _context.SacramentPrograms.Any(e => e.ID == id);

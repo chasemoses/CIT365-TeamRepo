@@ -32,7 +32,7 @@ namespace Mega_Desk_Web_App.Models
 
         [Display(Name = "Name")]
         [RegularExpression(@"^[a-zA-Z\s]*$")]
-        [StringLength(50, MinimumLength = 5)]
+        [StringLength(50, MinimumLength = 3)]
         [Required]
         public string CustName { get; set; } = string.Empty;
 
