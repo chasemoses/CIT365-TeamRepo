@@ -8,26 +8,33 @@
 
 <h4>SacramentProgram</h4>
 <hr />
-<div class="row">
+<div >
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ProgramDate" class="control-label"></label>
-                <input asp-for="ProgramDate" class="form-control" />
-                <span asp-validation-for="ProgramDate" class="text-danger"></span>
+            <div>
+                <label>Number of Speakers</label>
+                <input type="text" name="numSpeakers" value="@ViewData["Speakers"]" />
             </div>
-            <div class="form-group">
-                <label asp-for="ConductorL" class="control-label"></label>
-                <input asp-for="ConductorL" class="form-control" />
-                <span asp-validation-for="ConductorL" class="text-danger"></span>
+            <div class="flex-layout">
+                <div class="form-group pt-3">
+                    <label asp-for="ProgramDate" class="control-label"></label>
+                    <input asp-for="ProgramDate" class="form-control" />
+                    <span asp-validation-for="ProgramDate" class="text-danger"></span>
+                </div>
+                <div class="form-group pt-3">
+                    <label asp-for="ConductorL" class="control-label"></label>
+                    <input asp-for="ConductorL" class="form-control" />
+                    <span asp-validation-for="ConductorL" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
+            
+            <div class="form-group pt-3">
                 <label asp-for="OpenSong" class="control-label"></label>
                 <input asp-for="OpenSong" class="form-control" />
                 <span asp-validation-for="OpenSong" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group pt-3">
                 <label asp-for="OpenPrayer" class="control-label"></label>
                 <input asp-for="OpenPrayer" class="form-control" />
                 <span asp-validation-for="OpenPrayer" class="text-danger"></span>
@@ -37,16 +44,24 @@
                 <input asp-for="SacramentSong" class="form-control" />
                 <span asp-validation-for="SacramentSong" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="SpeakerFullName" class="control-label"></label>
-                <input asp-for="SpeakerFullName" class="form-control" />
-                <span asp-validation-for="SpeakerFullName" class="text-danger"></span>
+
+            <div class="flex-layout">
+                @for (var i = 0; i < (int)ViewData["Speakers"]; i++)
+                {
+                    <div class="form-group">
+                        <label asp-for="SpeakerFullName" class="control-label"></label>
+                        <input asp-for="SpeakerFullName" class="form-control" />
+                        <span asp-validation-for="SpeakerFullName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Subject" class="control-label"></label>
+                        <input asp-for="Subject" class="form-control" />
+                        <span asp-validation-for="Subject" class="text-danger"></span>
+                    </div>
+                }
+               
             </div>
-            <div class="form-group">
-                <label asp-for="Subject" class="control-label"></label>
-                <input asp-for="Subject" class="form-control" />
-                <span asp-validation-for="Subject" class="text-danger"></span>
-            </div>
+           
             <div class="form-group">
                 <label asp-for="IntermedNum" class="control-label"></label>
                 <input asp-for="IntermedNum" class="form-control" />

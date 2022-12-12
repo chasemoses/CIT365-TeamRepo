@@ -131,3 +131,10 @@ div .acceptlink a {
     color: #52ADC7;
     font-weight: bold;
 }
+
+.flex-layout {
+    display: flex;
+    flex-direction: row;
+    column-gap: 30px;
+    justify-content: space-between;
+}
