@@ -9,7 +9,7 @@
 }
 
 
-<h1>Index</h1>
+<h1>List of Sacrament Programs</h1>
 
 <p class="newlink">
     <a asp-action="Create">Create New</a>
@@ -53,7 +53,7 @@
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["SacramentSortParm"]">@Html.DisplayNameFor(model => model.SacramentSong)</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["SpeakerFullNameSortParm"]">@Html.DisplayNameFor(model => model.SpeakerFullName)</a>
+                <a asp-action="">@Html.DisplayNameFor(model => model.Speakers)</a>
             </th>
             <th>
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["SubjectSortParm"]">@Html.DisplayNameFor(model => model.Subject)</a>
@@ -90,7 +90,16 @@
                 @Html.DisplayFor(modelItem => item.SacramentSong)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SpeakerFullName)
+                <table rules="rows">
+                    <tbody>
+                        @foreach (var speaker in item.Speakers)
+                        {
+                            <tr>
+                                <td>@speaker</td>
+                            </tr>           
+                        }
+                    </tbody>
+                </table>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Subject)

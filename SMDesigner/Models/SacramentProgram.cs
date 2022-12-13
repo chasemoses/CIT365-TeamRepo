@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Linq;
 
 namespace SMDesigner.Models
 {
     public class SacramentProgram
     {
+
+        
         public int ID { get; set; }
 
         [RegularExpression(@"^[a-zA-Z\s]*$")]
@@ -37,11 +40,10 @@ namespace SMDesigner.Models
         [Required]
         public string SacramentSong { get; set; }
 
-        [RegularExpression(@"^[a-zA-Z\s]*$")]
-        [Display(Name = "Speaker")]
-        [StringLength(30, MinimumLength = 3)]
-        [Required]
-        public string SpeakerFullName { get; set; }
+        // Custom Validator since regular regex expressions do not work on lists.
+        [Display(Name = "Speakers")]
+        [Required, NoNumberInListString]
+        public List<string> Speakers { get; set; }
 
         [RegularExpression(@"^[a-zA-Z\s]*$")]
         [Display(Name = "Subject")]
@@ -65,6 +67,11 @@ namespace SMDesigner.Models
         [StringLength(30, MinimumLength = 5)]
         [Required]
         public string ClosePrayer { get; set; }
+
+        public SacramentProgram()
+        {
+            Speakers = new();
+        }
 
     }
 }

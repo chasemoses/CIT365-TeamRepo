@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
@@ -19,8 +20,6 @@ namespace SMDesigner.Controllers
         {
             _context = context;
         }
-
-        public int NumSpeakers;
 
 
         // GET: SacramentPrograms
@@ -72,10 +71,10 @@ namespace SMDesigner.Controllers
                     sacramentPrograms = sacramentPrograms.OrderByDescending(s => s.OpenPrayer);
                     break;
                 case "speaker":
-                    sacramentPrograms = sacramentPrograms.OrderBy(s => s.SpeakerFullName);
+                    sacramentPrograms = sacramentPrograms.OrderBy(s => s.Speakers.Count);
                     break;
                 case "speaker_desc":
-                    sacramentPrograms = sacramentPrograms.OrderByDescending(s => s.SpeakerFullName);
+                    sacramentPrograms = sacramentPrograms.OrderByDescending(s => s.Speakers.Count);
                     break;
                 case "sacrament":
                     sacramentPrograms = sacramentPrograms.OrderBy(s => s.SacramentSong);
@@ -138,14 +137,20 @@ namespace SMDesigner.Controllers
             return View(sacramentProgram);
         }
 
-        
+
         // GET: SacramentPrograms/Create
+        [HttpGet]
         public IActionResult Create(string numSpeakers)
         {
             if (!string.IsNullOrEmpty(numSpeakers))
             {
+                var totalSpeakers = int.Parse(numSpeakers);
 
-                @ViewData["Speakers"] = int.Parse(numSpeakers);
+                // Validate to make sure we don't go over 10 speakers. Don't see the need to be able to do 100 hahaha
+                if (totalSpeakers <= 10)
+                {
+                    @ViewData["Speakers"] = totalSpeakers;
+                }
             }
 
 
@@ -157,16 +162,20 @@ namespace SMDesigner.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateProgram([Bind("ID,ConductorL,OpenSong,ProgramDate,OpenPrayer,SacramentSong,SpeakerFullName,Subject,IntermedNum,CloseSong,ClosePrayer")] SacramentProgram sacramentProgram)
+        public async Task<IActionResult> Create([Bind("ID,ConductorL,OpenSong,ProgramDate,OpenPrayer,SacramentSong,Speakers,Subject,IntermedNum,CloseSong,ClosePrayer")] SacramentProgram sacramentProgram, int numSpeakers)
         {
             try
             {
+                if (numSpeakers != null)
+                {
+                    ViewData["Speakers"] = numSpeakers;
+                }
                 if (ModelState.IsValid)
-            {
-                _context.Add(sacramentProgram);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+                {
+                    _context.Add(sacramentProgram);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
             catch (DbUpdateException /* ex */)
             {
@@ -175,6 +184,7 @@ namespace SMDesigner.Controllers
                     "Try again, and if the problem persists " +
                     "see your system administrator.");
             }
+
             return View(sacramentProgram);
         }
 
