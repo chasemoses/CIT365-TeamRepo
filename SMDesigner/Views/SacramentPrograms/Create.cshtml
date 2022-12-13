@@ -11,10 +11,19 @@
 <div >
     <div class="col-md-4">
         <form asp-action="Create">
+            Find by Year: <input type="text" name="NumSpeakers" value="@ViewData["Speakers"]" />
+            <input type="submit" value="Search" class="btn btn-default" />
+
+        </form>
+        <form asp-action="CreateProgram">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div>
-                <label>Number of Speakers</label>
-                <input type="text" name="numSpeakers" value="@ViewData["Speakers"]" />
+                @*<label>number of speakers</label>
+                <input type="text" name="NumSpeakers" value="@ViewData["Speakers"]" />
+
+                <input type="button" value="Add new Speaker" name="numSpeakers" onclick="location.href='@Url.Action("Create")'" />
+
+                @Html.ActionLink("Create", "Create", "SacramentPrograms", new { Id = 1 }, null)*@
             </div>
             <div class="flex-layout">
                 <div class="form-group pt-3">
@@ -44,24 +53,25 @@
                 <input asp-for="SacramentSong" class="form-control" />
                 <span asp-validation-for="SacramentSong" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="Subject" class="control-label"></label>
+                <input asp-for="Subject" class="form-control" />
+                <span asp-validation-for="Subject" class="text-danger"></span>
+            </div>
 
-            <div class="flex-layout">
+            @if (ViewData["Speakers"] != null)
+            {
                 @for (var i = 0; i < (int)ViewData["Speakers"]; i++)
                 {
-                    <div class="form-group">
-                        <label asp-for="SpeakerFullName" class="control-label"></label>
-                        <input asp-for="SpeakerFullName" class="form-control" />
-                        <span asp-validation-for="SpeakerFullName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Subject" class="control-label"></label>
-                        <input asp-for="Subject" class="form-control" />
-                        <span asp-validation-for="Subject" class="text-danger"></span>
-                    </div>
-                }
-               
-            </div>
-           
+                <div class="flex-layout">
+                        <div class="form-group">
+                            <label asp-for="SpeakerFullName" class="control-label"> Speaker # @i = i +1</label>
+                            <input asp-for="SpeakerFullName" class="form-control" />
+                            <span asp-validation-for="SpeakerFullName" class="text-danger"></span>
+                        </div>
+                </div>
+               }
+            }
             <div class="form-group">
                 <label asp-for="IntermedNum" class="control-label"></label>
                 <input asp-for="IntermedNum" class="form-control" />

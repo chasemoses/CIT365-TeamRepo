@@ -20,7 +20,8 @@ namespace SMDesigner.Controllers
             _context = context;
         }
 
-        
+        public int NumSpeakers;
+
 
         // GET: SacramentPrograms
         public async Task<IActionResult> Index(string sortOrder, string monthString, string yearString)
@@ -137,18 +138,26 @@ namespace SMDesigner.Controllers
             return View(sacramentProgram);
         }
 
+        
         // GET: SacramentPrograms/Create
-        public IActionResult Create()
+        public IActionResult Create(string numSpeakers)
         {
+            if (!string.IsNullOrEmpty(numSpeakers))
+            {
+
+                @ViewData["Speakers"] = int.Parse(numSpeakers);
+            }
+
+
             return View();
         }
 
-        // POST: SacramentPrograms/Create
+        // POST: SacramentPrograms/CreateProgram
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,ConductorL,OpenSong,ProgramDate,OpenPrayer,SacramentSong,SpeakerFullName,Subject,IntermedNum,CloseSong,ClosePrayer")] SacramentProgram sacramentProgram)
+        public async Task<IActionResult> CreateProgram([Bind("ID,ConductorL,OpenSong,ProgramDate,OpenPrayer,SacramentSong,SpeakerFullName,Subject,IntermedNum,CloseSong,ClosePrayer")] SacramentProgram sacramentProgram)
         {
             try
             {

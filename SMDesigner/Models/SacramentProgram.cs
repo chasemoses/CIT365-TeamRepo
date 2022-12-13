@@ -39,20 +39,19 @@ namespace SMDesigner.Models
 
         [RegularExpression(@"^[a-zA-Z\s]*$")]
         [Display(Name = "Speaker")]
-        [StringLength(30, MinimumLength = 5)]
+        [StringLength(30, MinimumLength = 3)]
         [Required]
         public string SpeakerFullName { get; set; }
 
         [RegularExpression(@"^[a-zA-Z\s]*$")]
         [Display(Name = "Subject")]
-        [StringLength(30, MinimumLength = 5)]
+        [StringLength(30, MinimumLength = 4)]
         [Required]
         public string Subject { get; set; }
 
         [RegularExpression(@"^[a-zA-Z\s]*$")]
         [Display(Name = "Intermediate Number")]
         [StringLength(45, MinimumLength = 5)]
-        [Required]
         public string IntermedNum { get; set; }
 
         [RegularExpression(@"^[a-zA-Z\s]*$")]
