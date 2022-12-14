@@ -147,10 +147,12 @@ namespace SMDesigner.Controllers
                 var totalSpeakers = int.Parse(numSpeakers);
 
                 // Validate to make sure we don't go over 10 speakers. Don't see the need to be able to do 100 hahaha
-                if (totalSpeakers <= 10)
+                if (totalSpeakers > 10)
                 {
-                    @ViewData["Speakers"] = totalSpeakers;
+                    // Cap the speaker limit to 10 if user tries to input speaker amount higher than that.
+                    totalSpeakers = 10;
                 }
+                @ViewData["Speakers"] = totalSpeakers;
             }
 
 
